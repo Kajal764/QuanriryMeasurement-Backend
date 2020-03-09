@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import quantitymeasurement.demo.Exception.MeasurementException;
-import quantitymeasurement.demo.dto.QuantityDto;
+import quantitymeasurement.demo.dto.QuantityMeasurementDto;
 import quantitymeasurement.demo.dto.ResponeDto;
 import quantitymeasurement.demo.model.UnitMeasurement;
 import quantitymeasurement.demo.service.ConversionService;
@@ -15,32 +15,30 @@ import java.util.List;
 
 @CrossOrigin(origins = "*")
 @RestController
-
-public class QuantityController {
+@RequestMapping("/unit")
+public class QuantityMeasurementController {
 
     @Autowired
     private ConversionService conversionService;
 
-    @PostMapping("/convert")
-    public ResponseEntity<ResponeDto> getUnitValue(@RequestBody QuantityDto userDto) throws MeasurementException {
+    @PostMapping("/convertedvalue")
+    public ResponseEntity<ResponeDto> getUnitValue(@RequestBody QuantityMeasurementDto userDto) throws MeasurementException {
         double convertedValue = conversionService.getConvertedValues(userDto);
         ResponeDto value = new ResponeDto("Unit", convertedValue);
         return new ResponseEntity<ResponeDto>(value, HttpStatus.OK);
     }
 
-    @GetMapping("{subUnit}")
-    public List<UnitMeasurement.UnitType> getUnit(@PathVariable String subUnit) throws MeasurementException {
-        List<UnitMeasurement.UnitType> unit = conversionService.getUnit(subUnit);
-        return unit;
+    @GetMapping("/subunit/{unit}")
+    public List<UnitMeasurement.UnitType> getUnit(@PathVariable("unit") String unit) throws MeasurementException {
+        List<UnitMeasurement.UnitType> units = conversionService.getSubUnit(unit);
+        return units;
     }
 
-    @GetMapping("/mainunit")
+    @GetMapping("/units")
     public List getMainUnit(){
         List mainUnit = conversionService.getMainUnit();
         return mainUnit;
     }
-
-
 }
 
 

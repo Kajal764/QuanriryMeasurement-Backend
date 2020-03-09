@@ -10,7 +10,6 @@ import java.util.List;
 @Setter
 public class ResponeDto {
 
-
     private List<UnitMeasurement.UnitType> unit;
     private double convertedValue;
     private String message;
@@ -18,21 +17,6 @@ public class ResponeDto {
     public ResponeDto(String message, Double convertedValue) {
         this.message=message;
         this.convertedValue=convertedValue;
-
     }
 
-    public ResponeDto(String message, List<UnitMeasurement.UnitType> list) {
-        this.message=message;
-        this.unit=list;
-    }
-
-
-    @Override
-    public String toString() {
-        return "ResponeDto{" +
-                "unit=" + unit +
-                ", convertedValue=" + convertedValue +
-                ", message='" + message + '\'' +
-                '}';
-    }
 }

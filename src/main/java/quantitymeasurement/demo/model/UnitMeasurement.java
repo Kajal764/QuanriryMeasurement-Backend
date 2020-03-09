@@ -7,7 +7,7 @@ public class UnitMeasurement {
         FEET(12, MainUnit.LENGTH),
         INCH(1, MainUnit.LENGTH),
         YARD(36,MainUnit.LENGTH),
-        CENTIMETER(1 / 2.54,MainUnit.LENGTH),
+        CENTIMETER(1 / 2.5,MainUnit.LENGTH),
         LITRE(1000, MainUnit.VOLUME),
         GALLON(3785, MainUnit.VOLUME),
         MILILITRE(1,MainUnit.VOLUME),
