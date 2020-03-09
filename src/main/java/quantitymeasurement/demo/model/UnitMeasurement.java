@@ -2,29 +2,29 @@ package quantitymeasurement.demo.model;
 
 public class UnitMeasurement {
 
-
     public enum UnitType{
-        FEET(12, "LENGTH"),
-        INCH(1, "LENGTH"),
-        YARD(36, "LENGTH"),
-        CENTIMETER(1 / 2.54, "LENGTH"),
-        LITRE(1000, "VOLUME"),
-        GALLON(3785, "VOLUME"),
-        MILILITRE(1, "VOLUME"),
-        TONNE(1000000, "Mass"),
-        KILOGRAM(1000, "Mass"),
-        GRAM(1, "Mass"),
-        FARHANHIT(1, "TEMPERATURE"),
-        CELCIUS(2.12, "TEMPERATURE");
+
+        FEET(12, MainUnit.LENGTH),
+        INCH(1, MainUnit.LENGTH),
+        YARD(36,MainUnit.LENGTH),
+        CENTIMETER(1 / 2.54,MainUnit.LENGTH),
+        LITRE(1000, MainUnit.VOLUME),
+        GALLON(3785, MainUnit.VOLUME),
+        MILILITRE(1,MainUnit.VOLUME),
+        TONNE(1000000, MainUnit.MASS),
+        KILOGRAM(1000, MainUnit.MASS),
+        GRAM(1, MainUnit.MASS),
+        FARHANHIT(1, MainUnit.TEMPERATURE),
+        CELCIUS(2.12, MainUnit.TEMPERATURE);
 
         public double value;
-        public String unitType;
+        public MainUnit unitType;
 
-        UnitType(double val, String unittype) {
+        UnitType(double val, MainUnit unitType) {
             this.value = val;
-            this.unitType = unittype;
+            this.unitType = unitType;
         }
-
     }
-
 }
+
+
