@@ -1,13 +1,13 @@
-package quantitymeasurement.demo.Service;
+package quantitymeasurement.demo.service;
 
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import quantitymeasurement.demo.Exception.MeasurementException;
+import quantitymeasurement.demo.exception.MeasurementException;
 import quantitymeasurement.demo.dto.QuantityMeasurementDto;
 import quantitymeasurement.demo.model.UnitMeasurement;
-import quantitymeasurement.demo.service.UnitConversion;
+
 import java.util.List;
 
 @SpringBootTest
@@ -25,6 +25,18 @@ public class QuantityMeasurementServiceTest {
     }
 
     @Test
+    void givenValue0_WhenGetConvertedValue_ThenItShouldThrowException() throws Exception {
+       try {
+           QuantityMeasurementDto quantityDto = new QuantityMeasurementDto(UnitMeasurement.UnitType.FEET, UnitMeasurement.UnitType.INCH);
+           double convertedValues = unitConversion.getConvertedValues(quantityDto);
+       }catch (MeasurementException e){
+           Assert.assertEquals("Enter Value",e.getMessage());
+       }
+
+    }
+
+
+    @Test
     public void whenGivenZeroInch_ShouldReturnTrue() throws MeasurementException {
         QuantityMeasurementDto quantityDto=new QuantityMeasurementDto(0, UnitMeasurement.UnitType.INCH,UnitMeasurement.UnitType.INCH);
         double convertedValues = unitConversion.getConvertedValues(quantityDto);
@@ -35,7 +47,6 @@ public class QuantityMeasurementServiceTest {
     public void whenGiven0FeetAndInch_ItshouldReturnCorrectValue() throws MeasurementException {
         QuantityMeasurementDto quantityDto=new QuantityMeasurementDto(1, UnitMeasurement.UnitType.FEET,UnitMeasurement.UnitType.INCH);
         double convertedValues = unitConversion.getConvertedValues(quantityDto);
-        System.out.println(convertedValues);
         Assert.assertEquals(12.0,convertedValues,0);
 
     }
@@ -51,7 +62,6 @@ public class QuantityMeasurementServiceTest {
     void given1Yard_WhenConvertToFeet_ThenItShouldReturnCorrectValue() throws MeasurementException {
         QuantityMeasurementDto quantityMeasurementDto = new QuantityMeasurementDto(1.0, UnitMeasurement.UnitType.YARD, UnitMeasurement.UnitType.FEET);
         double convertedValues = unitConversion.getConvertedValues(quantityMeasurementDto);
-        System.out.println(convertedValues);
         Assert.assertEquals(3.0,convertedValues,0);
     }
 
@@ -114,6 +124,19 @@ public class QuantityMeasurementServiceTest {
         catch (MeasurementException e){
             Assert.assertEquals("Unit Doesn't exist !!!",e.getMessage());
         }
+    }
+
+
+    @Test
+    void givenFeetWithoutConvertItToJson_WhenWhenGetConvertedValue_ThenResponseStatusShouldReturnBadRequest() throws Exception {
+       try {
+           QuantityMeasurementDto quantityDto = new QuantityMeasurementDto(2, UnitMeasurement.UnitType.FEET);
+           double convertedValues = new UnitConversion().getConvertedValues(quantityDto);
+           System.out.println(convertedValues);
+       }
+       catch (MeasurementException e){
+           Assert.assertEquals("Data Invalid",e.getMessage());
+       }
     }
 
 }

@@ -1,4 +1,4 @@
-package quantitymeasurement.demo.Exception;
+package quantitymeasurement.demo.exception;
 
 public class MeasurementException extends Exception {
 

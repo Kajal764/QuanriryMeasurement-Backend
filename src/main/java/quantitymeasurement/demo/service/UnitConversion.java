@@ -1,7 +1,7 @@
 package quantitymeasurement.demo.service;
 
 import org.springframework.stereotype.Service;
-import quantitymeasurement.demo.Exception.MeasurementException;
+import quantitymeasurement.demo.exception.MeasurementException;
 import quantitymeasurement.demo.dto.QuantityMeasurementDto;
 import quantitymeasurement.demo.model.MainUnit;
 import quantitymeasurement.demo.model.UnitMeasurement;
@@ -14,10 +14,12 @@ public class UnitConversion implements ConversionService {
 
     @Override
     public double getConvertedValues(QuantityMeasurementDto unitDto) throws MeasurementException {
-//        if(unitDto.unit1==null || unitDto.unit2==null)
-//            throw new MeasurementException("Data Invalid");
+        if(unitDto.getValue()==0)
+            throw new MeasurementException("Enter Value");
+        if(unitDto.unit1==null || unitDto.unit2==null)
+            throw new MeasurementException("Data Invalid");
         if(unitDto.unit1.unitType.equals(unitDto.unit2.unitType))
-            return unitDto.value * unitDto.unit1.value / unitDto.unit2.value;
+            return unitDto.getValue() * unitDto.unit1.value / unitDto.unit2.value;
         throw new MeasurementException("Enter Valid Data !!!");
     }
 

@@ -1,4 +1,4 @@
-package quantitymeasurement.demo.Exception;
+package quantitymeasurement.demo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +12,8 @@ public class ExceptionHandler {
     {
         return new ResponseEntity(message.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+
 
 
 }
